@@ -1,41 +1,416 @@
+<!-- 1)JavaScript is an object-based scripting language which is lightweight and cross-platform.
+2)Java scripts are case sensitive
+3)it is embedded with html
+4)it is support by advance browser.
+5)It is used for client-side validation.
+6)Ther are 2 types of comment
+i)single row (//)
+ii)multi row (/*    */)
+7)the only data type we have is var
+example :- var a=10;
+8)variable declaration can be (a to z) and (A to Z) or under score(_) or dollar($)
+we cannot use numbers (0 to 9) but we can have after an alfabet. ex:- a1.
+9)we can create windows and dialog boxes.
+10)we will be using regular expressions for validation.
+11)we have functions and event handing in javascript.
+12)we can make the html page dynamic using Javascript.
+----------------------------------------------------------------------------------------------
 <html>
 <head>
-<style>
-ul.a {list-style-type:circle;}
-ul.b {list-style-type:square;}
-ol.c {list-style-type:upper-roman;}
-ol.d {list-style-type:lower-alpha;}
-</style>
-</head>
+<title>This is a JavaScript example</title>
 
-<body>
-<p>Example of unordered lists:</p>
+<script language="JavaScript">
+document.write("Hello World!");
+</script>
 
-<ul class="a">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Coca Cola</li>
-</ul>
+<h1>hello world</h1>
+</html>
+-------------------------------------------
+<html><script>
+var a,b,c;
+a=prompt("enter a number");
+b=prompt("enter a number");
+c=prompt("enter a number");
+if((parseInt(a) > parseInt(b)) && (parseInt(a) > parseInt(c)))
+{ document.write("the greatest is "+a);
+alert("the greatest is "+a); }
+else if((parseInt(b) > parseInt(a)) && (parseInt(b) > parseInt(c)))
+{ document.write("the greatest is "+b);
+alert("the greatest is "+b);}
+else
+{
+document.write("the greatest is "+c);
+alert("the greatest is "+c);
+}
+</script></html>
+-------------------------------------------------------
+<html><script>
+var a;
+a=prompt("enter a number");
+if((parseInt(a) %2==0))
+{ 
+document.write("the no  is even ");
+alert("the no  is even "); 
+}
+else
+{
+document.write("the no  is odd ");
+alert("the no  is odd ");
+}
+</script></html>
+-------------------------------------------------
+<html>
+<script>
+var n=prompt("Enter a no")
+//x=parseInt(n);
+switch(n)
+{
+case "1":
+document.write("sunday");
+break;
+case "2":
+document.write("Monday");
+break;
+case "3":
+document.write("Tuesday");
+break;
+case "4":
+document.write("Wednesday");
+break;
+case "5":
+document.write("Thursday");
+break;
+case "6":
+document.write("Friday");
+break;
+case "7":
+document.write("saturday");
+break;
+default:
+document.write("enter a valid no");
+}
+</script></html>
+-----------------------------------------------------------------------
+<html>
+<script>
+var a=prompt("Enter a no");
+var b=prompt("Enter a no");
+alert("enter your choice 1.addition 2.subtraction 3.multiplication 4.division ");
+var n=prompt("enter a choice");
+switch(n)
+{
+case "1":
+document.write("The sum is"+(parseInt(a)+parseInt(b)));
+break;
+case "2":
+document.write("The sub is"+(a-b));
+break;
+case "3":
+document.write("The mul is"+(a*b));
+break;
+case "4":
+document.write("The div is"+(a / b));
+break;
+default:
+document.write("enter a valid no");
+}
+</script></html>
 
-<ul class="b">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Coca Cola</li>
-</ul>
+-------------------------------------------
+<html>
+<script>
+var cars=["maruti","BMW","Ford","volvo"];
+for (var i=0;i<cars.length;i++)
+{
+document.write(cars[i] + "<br>");
+}
+</script>
+</html>
+--------------------------------------------------------------------------
 
-<p>Example of ordered lists:</p>
+--------------------------------------------------------------------------
+<html>
+<script>
+var arry=[[1,2,3],[4,5,6],[7,8,9]];
+for(var i=0;i<3;i++)
+{
+for(var j=0;j<3;j++)
+{
+document.write(arry[i][j]+ "   ");
+}
+document.write("<br>");
+}
+</script>
+</html>
 
-<ol class="c">
-<li>Coffee</li>
-  <li>Tea</li>
-  <li>Coca Cola</li>
-</ol>
+Function and event
+--------------------------------------------------------------
+<html>
+<script>
+function addNum()
+{
+a=prompt("enter a no");
+b=prompt("enter a no");
+c=parseInt(a)+parseInt(b);
+document.write("the sum is "+c);
+}
 
-<ol class="d">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Coca Cola</li>
-</ol>
+function subNum()
+{
+a=prompt("enter a no");
+b=prompt("enter a no");
+c=parseInt(a)-parseInt(b);
+document.write("the sub is "+c);
+}
 
+function mulNum()
+{
+a=prompt("enter a no");
+b=prompt("enter a no");
+c=parseInt(a)*parseInt(b);
+document.write("the mul is "+c);
+}
+
+function divNum()
+{
+a=prompt("enter a no");
+b=prompt("enter a no");
+c=parseInt(a) / parseInt(b);
+document.write("the div is "+c);
+}
+</script><body>
+<input type="button" name=a1 value="click here to add 2 nos"
+ onclick="addNum()">
+<input type="button" name=b1 value="click here to sub 2 nos" 
+onclick="subNum()">
+<input type="button" name=c1 value="click here to mul 2 nos"
+onclick="mulNum()">
+<input type="button" name=d1 value="click here to div 2 nos" 
+onclick="divNum()">
 </body>
 </html>
+
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+
+<html><script>
+function cost()
+{
+var a=f1.t2.value;
+var b=f1.t3.value;
+document.write("The cost of the item is "+(a*b));
+}
+</script><body>
+<form name=f1> 
+<table>
+<tr><td>ItemName<td><input type=text name=t1 size=20></tr>
+<tr><td>ItemPrice<td><input type=text name=t2 size=20></tr>
+<tr><td>ItemQunatity<td><input type=text name=t3 size=20></tr>
+<tr><td><input type="button" name=a1 value="click here to find the cost"
+ onclick="cost()">
+</table></form></body></html>
+-----------------------------------------------------------------------
+
+<html><script>  
+class Employee  
+  {      constructor(id,name)  
+    {      this.id=id;  
+      this.name=name;      }  
+    detail()  
+    {  
+  document.writeln(this.id+" "+this.name+"<br>")  
+    }    }  
+var e1=new Employee(101,"sandip");  
+var e2=new Employee(102,"Kiran");  
+e1.detail();
+e2.detail();  
+</script></html>
+
+-----------------------------------------------------------------------------
+<html>
+<script>
+var person=new Object();
+person.firstname="sandip";
+person.lastname="kumar";
+person.company="IIHT";
+person.address="Bangalore";
+document.write(person.firstname+ "  "+person.lastname+" work in "
++person.company);
+</script>
+</html>
+-->
+<html>
+<script>
+function person(firstname,lastname,company,address)
+{this.firstname=firstname;
+this.lastname=lastname;
+this.company=company;
+this.address=address;}
+var emp=new person("sandip","kumar","IIHT","Bangalore");
+document.write(emp.firstname+"   "+emp.lastname+"  work in "
++emp.company+"   stays in "+emp.address);
+</script></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
