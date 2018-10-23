@@ -1,0 +1,204 @@
+Spring Testing
+------------------------
+1)spring has it's own testing framework for all objects created under it's IOC container.
+2)spring has lot of core,MVC JUNIT testing framework,making it really easy to create JUNIT tests for its sources.
+------------------------------------------------------
+example 1
+-------------------
+spring JDBC
+-------------------------
+create table employee(eno number(4) primary key,ename varchar2(100),desig varchar2(100),sal number(6,2));
+
+Employee.java(getter and setter methods)
+----------------------------------
+import java.io.Serializable;
+
+class Employee implements Serialzable
+{
+private int eno;
+private String ename;
+private String desig;
+private double sal;
+getter(),setter()
+}
+----------------------------------------------------------------------------
+EmployeeDao.java
+---------------------------------
+interface EmployeeDao
+{
+public void save(Employee e);
+public void update(Employee e);
+public void delete(int eno);
+public Employee get(int eno);
+}
+--------------------------------------------------------------------------
+EmployeeDaoImpl.java
+--------------------------------------
+import java.sql.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+
+public class EmployeeDaoImpl implements EmployeeDao
+{
+private SimpleJdbcTemplate simpleJdbcTemplate;
+
+public EmployeeDaoImpl()
+{}
+
+@Override
+public void save(Employee e)
+{
+simpleJdbcTemplate.getJdbcOperations().update(new PreparedStatementCreator()
+{
+public PreparedStatement createPreparedStatement(Connection con)throws SQLException
+{
+String query="insert into employee(eno,ename,desig,sal) values(?,?,?,?)";
+PreparedStatement pstmt=con.prepareStatement(query);
+pstmt.setInt(1,e.getEno());
+pstmt.setString(2,e.getEname());
+pstmt.setString(3,e.getDesig());
+pstmt.setDouble(4,e.getSal());
+return pstmt;
+}
+});
+
+@Override
+public void update(Employee e)
+{}
+@Override
+public void delete(int eno)
+{}
+@Override
+public Employee get(int eno)
+{}
+-----------------------------------------------------------------
+SpringJdbcTest.java
+---------------------------------
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.test.Employee;
+import org.test.EmployeeDao;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+public class SpringJdbcTest
+{
+ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
+
+@Test
+public void testSpringJdbc()
+{
+EmployeeDao edao=(EmployeeDao)context.getBean("empdao");
+Employee e=new Employee();
+e.setEno(1);
+e.setEname("sandip");
+e.setDesig("Director");
+e.setSal(10000.00);
+edao.save(e);
+System.out.println("record inserted successfully......");
+}
+}
+----------------------------------------------------------------------------------------------
+applicationContext.xml
+------------------------------------------------
+<beans>
+<bean class="org.apache.commons.dbcp.BasicDataSource">
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<property name="username" value="system"/>
+<property name="password" value="1234"/>
+</bean>
+
+<bean class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate" autowire="constructor"/>
+
+<bean id="empdao" class="org.test.EmployeeDaoImpl"/>
+</beans>
+--------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
