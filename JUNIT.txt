@@ -1,0 +1,453 @@
+JUNIT
+-----------------
+It is a unit testing framework for java programming language.
+It is a open source framework.
+It provides annotations to identify test methods.
+It provides assertions for testing excepted results.
+It provides test runners for running tests.
+
+Junit can be run automatically and check the own results and provide immediate feedback.
+
+Junit can be organized into test suites containing test cases.
+test suites are group of classes which contain test cases.
+-------------------------------------------------
+example-1
+----------------------
+import org.junit.Test; 
+import static org.junit.Assert.*;  
+public class TestAssertions 
+{ 
+ @Test    //Used to identify that a method is a test method
+public void testAssertions()
+ {       
+//test data   
+    String str1 = new String ("abc"); 
+      String str2 = new String ("abc");   
+    String str3 = null;    
+   String str4 = "abc";   
+    String str5 = "abc";     
+  int val1 = 5;     
+  int val2 = 6;       
+String[] expectedArray = {"one", "two", "three"};      
+ String[] resultArray =  {"one", "two", "three"};  
+      //Check that two objects are equal     
+  assertEquals(str1, str2);  
+      //Check that a condition is true      
+ assertTrue (val1 < val2);  
+      //Check that a condition is false    
+   assertFalse(val1 > val2);  
+      //Check that an object isn't null      
+ assertNotNull(str1);  
+      //Check that an object is null      
+ assertNull(str3);  
+      //Check if two object references point to the same object      
+ assertSame(str4,str5);  
+      //Check if two object references not point to the same object   
+    assertNotSame(str1,str3);  
+      //Check whether two arrays are equal to each other.      
+ assertArrayEquals(expectedArray, resultArray);   
+ } } 
+-------------------------------------------------------------
+junit4.12.jar
+hamcrest-core-1.3.jar
+
+-----------------------------------------------------------------
+example-2
+---------------------
+Calculator.java
+-------------------------------------------------
+public class Calculator {
+
+	public int square(int i) 
+	{ return i*i;   }
+
+	public String user(String string) 
+	{ return "sandip"; }
+
+	public String concat(String string, String string2) 
+	{ return string+string2;}
+
+	public int sub(int i, int j) 
+	{ return i-j; }
+
+	public int add(int i, int j) 
+	{ return i+j; }
+}
+-------------------------------------------------------------------
+CalculatorTest.java
+-----------------------------------
+import static org.junit.Assert.*;
+import org.junit.Test;
+public class CalculatorTest 
+{	Calculator cal=new Calculator();
+	@Test  //Used to identify that a method is a test method
+	public void testSquares()
+	{	
+		assertEquals(25,cal.square(5));
+		assertEquals(5*5,cal.square(5));
+		}
+	@Test
+	public void testUser()
+	{
+		assertEquals("sandip",cal.user("sandip"));
+	}
+	@Test
+	public void stringtest()
+	{
+	String result = cal.concat("Hello", "World");
+	assertEquals("HelloWorld", result);
+	String s1="Hello";
+	String s2="Hello";
+	assertSame(s1,s2); 
+	}}
+--------------------------------------------------------------
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class CalculatorTest1 
+{
+	Calculator c=null;
+	
+@Before  //It is used to call the annotated function before running each of the tests
+
+	public void before()
+	{
+	System.out.println("Before Test");
+	 c=new Calculator();
+	}
+	@After  //It is used to call the annotated function after each test method
+	public void after()
+	{               
+	 System.out.println("After Test"); 	}
+
+	@Test //Used to identify that a method is a test method
+
+	public void testAdd() {
+	System.out.println("Add function");
+	assertEquals("Result",5,c.add(2,3));
+	
+	}
+	@Test  //Used to identify that a method is a test method
+
+	public void testSub() {
+	System.out.println("Sub function");
+	assertEquals("Result",20,c.sub(100,80));
+	}
+	
+	
+
+}
+---------------------------------------------------------------------------------------------
+example 3
+----------------------
+import junit.framework.*;
+
+public class JavaTest extends TestCase 
+{
+    int value1, value2;
+   
+   // assigning the values
+   public void setUp(){
+      value1 = 3;
+      value2 = 3;
+   }
+
+   // test method to add two values
+   public void testAdd(){
+      double result = value1 + value2;
+      assertTrue(result == 6);
+   }
+}
+------------------------------------------------------
+import org.junit.Test;
+import org.junit.Ignore;
+import static org.junit.Assert.assertEquals;
+
+public class TestJunit {
+
+   String message = "All state";	
+   MessageUtil1 messageUtil = new MessageUtil1(message);
+   
+   @Test(expected = ArithmeticException.class)
+   public void testPrintMessage() {	
+      System.out.println("Inside testPrintMessage()");     
+      messageUtil.printMessage();     
+   }
+
+   @Test
+   public void testSalutationMessage() {
+      System.out.println("Inside testSalutationMessage()");
+      message = "Hi!" + "All state";
+      assertEquals(message,messageUtil.salutationMessage());
+   }
+}
+-------------------------------------------------------------------------------------
+public class MessageUtil {
+
+   private String message;
+
+   //Constructor
+      public MessageUtil(String message){
+      this.message = message; 
+   }
+
+   // prints the message
+   public void printMessage(){
+      System.out.println(message);
+      int a = 0;
+      int b = 1/a;
+   }   
+
+     public String salutationMessage(){
+      message = "Hi!" + message;
+      System.out.println(message);
+      return message;
+   }   
+}  	
+--------------------------------------------------------------
+public class EmployeeDetails {
+   private String name;
+   private double monthlySalary;
+   private int age;
+      public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public double getMonthlySalary() {
+      return monthlySalary;
+   }
+   public void setMonthlySalary(double monthlySalary) {
+      this.monthlySalary = monthlySalary;
+   }
+   public int getAge() {
+      return age;
+   }
+   public void setAge(int age) {
+      this.age = age;
+   }}
+-------------------------------------------------------------------
+public class EmpBusinessLogic {
+   // Calculate the yearly salary of employee
+   public double calculateYearlySalary(EmployeeDetails employeeDetails) {
+      double yearlySalary = 0;
+      yearlySalary = employeeDetails.getMonthlySalary() * 12;
+      return yearlySalary;
+   }
+	
+   // Calculate the appraisal amount of employee
+   public double calculateAppraisal(EmployeeDetails employeeDetails) {
+      double appraisal = 0;
+		
+      if(employeeDetails.getMonthlySalary() < 10000){
+         appraisal = 500;
+      }else{
+         appraisal = 1000;
+      }		
+      return appraisal;
+   }}
+----------------------------------------------------
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+public class TestEmployeeDetails {
+   EmpBusinessLogic empBusinessLogic = new EmpBusinessLogic();
+   EmployeeDetails employee = new EmployeeDetails();
+     @Test  //test to check appraisal
+   public void testCalculateAppriasal() {
+      employee.setName("Rajeev");
+      employee.setAge(25);
+      employee.setMonthlySalary(8000);
+      double appraisal = empBusinessLogic.calculateAppraisal(employee);
+      assertEquals(500, appraisal, 0.0);
+   }
+     @Test  // test to check yearly salary
+   public void testCalculateYearlySalary() {
+      employee.setName("Rajeev");
+      employee.setAge(25);
+      employee.setMonthlySalary(8000);
+      double salary = empBusinessLogic.calculateYearlySalary(employee);
+      assertEquals(96000, salary, 1);   }}
+------------------------------------------------------------------------------------
+w.ap to enter details of a Bank account of a person.
+
+1)balance
+2)deposite
+3)withdraw (but min bal should be 1000)
+4)check balance
+-------------------------------------------------------------------------------------
+Test Runners class
+------------------------
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+public class TestRunner 
+{
+   public static void main(String[] args) 
+{
+      Result result = JUnitCore.runClasses(TestEmployeeDetails.class);
+		
+      for (Failure failure : result.getFailures()) {
+         System.out.println(failure.toString());
+      }
+      System.out.println(result.wasSuccessful());
+   }
+}
+ 
+----------------------------------------------------------------
+1)@Test
+The Test annotation tells JUnit that the public void method to which it is attached can be run as a test case.
+2)@Before
+Several tests need similar objects created before they can run. Annotating a public void method with @Before causes that method to be run before each Test method.
+3)@After
+If you allocate external resources in a Before method, you need to release them after the test runs. Annotating a public void method with @After causes that method to be run after the Test method.
+4)@BeforeClass
+Annotating a public static void method with @BeforeClass causes it to be run once before any of the test methods in the class.
+5)@AfterClass
+This will perform the method after all tests have finished. This can be used to perform clean-up activities.
+
+6)@Ignore
+The Ignore annotation is used to ignore the test and that test will not be executed.
+------------------------
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+public class JunitAnnotation {
+   //execute before class
+   @BeforeClass
+   public static void beforeClass() {
+      System.out.println("in before class");   }
+   //execute after class
+   @AfterClass
+   public static void  afterClass() {
+      System.out.println("in after class");   }
+   //execute before test
+   @Before
+   public void before() {
+      System.out.println("in before");   }
+   //execute after test
+   @After
+   public void after() {
+      System.out.println("in after");   }
+   //test case
+   @Test
+   public void test() {
+      System.out.println("in test");   }
+   //test case ignore and will not execute
+   @Ignore
+   public void ignoreTest() {
+      System.out.println("in ignore test");
+   }}
+-------------------------------------------------------
+public class Calculation {  
+  
+    public static int findMax(int arr[]){  
+        int max=0;  
+        for(int i=1;i<arr.length;i++){  
+            if(max<arr[i])  
+                max=arr[i];  
+        }  
+        return max;  
+    }  
+}  
+-----------------------------------------------------------------
+import static org.junit.Assert.*;  
+import org.junit.Test;  
+  
+public class TestLogic {  
+  
+    @Test  
+    public void testFindMax(){  
+        assertEquals(4,Calculation.findMax(new int[]{1,3,4,2}));  
+        assertEquals(-1,Calculation.findMax(new int[]{-12,-1,-3,-4,-2}));  
+    }  
+}  
+------------------------------------------------------------------
+
+public class Calculation {  
+    //method that returns maximum number  
+    public static int findMax(int arr[]){  
+        int max=0;  
+        for(int i=1;i<arr.length;i++){  
+            if(max<arr[i])  
+                max=arr[i];  
+        }  
+        return max;  
+    }  
+    //method that returns cube of the given number  
+    public static int cube(int n){  
+        return n*n*n;  
+    }  
+    //method that returns reverse words   
+    public static String reverseWord(String str){  
+  
+        StringBuilder result=new StringBuilder();  
+        StringTokenizer tokenizer=new StringTokenizer(str," ");  
+  
+        while(tokenizer.hasMoreTokens()){  
+        StringBuilder sb=new StringBuilder();  
+        sb.append(tokenizer.nextToken());  
+        sb.reverse();  
+  
+        result.append(sb);  
+        result.append(" ");  
+        }  
+        return result.toString();  
+    }  
+} 
+-------------------------------------------------------------------------------------- 
+
+import static org.junit.Assert.assertEquals;  
+import org.junit.After;  
+import org.junit.AfterClass;  
+import org.junit.Before;  
+import org.junit.BeforeClass;  
+import org.junit.Test;  
+import Calculation;  
+  
+public class TestCase2 {  
+  
+    @BeforeClass  
+    public static void setUpBeforeClass() throws Exception {  
+        System.out.println("before class");  
+    }  
+    @Before  
+    public void setUp() throws Exception {  
+        System.out.println("before");  
+    }  
+  
+    @Test  
+    public void testFindMax(){  
+        System.out.println("test case find max");  
+        assertEquals(4,Calculation.findMax(new int[]{1,3,4,2}));  
+        assertEquals(-2,Calculation.findMax(new int[]{-12,-3,-4,-2}));  
+    }  
+    @Test  
+    public void testCube(){  
+        System.out.println("test case cube");  
+        assertEquals(27,Calculation.cube(3));  
+    }  
+    @Test  
+    public void testReverseWord(){  
+        System.out.println("test case reverse word");  
+        assertEquals("ym eman si nahk",Calculation.reverseWord("my name is khan");  
+    }  
+    @After  
+    public void tearDown() throws Exception {  
+        System.out.println("after");  
+    }  
+  
+    @AfterClass  
+    public static void tearDownAfterClass() throws Exception {  
+        System.out.println("after class");  
+    }  
+  
+}  
+---------------------------------------------------
